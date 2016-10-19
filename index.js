@@ -40,50 +40,26 @@ const parser = (content, filename) =>
                         }, ''),
                 'tags': {
                     'example': curr.tags.filter(tag => tag.type === 'example')
-                        .reduce((prev, curr) => {
-
-                            prev.push(curr.string);
-
-                            return prev;
-
-                        }, []),
+                        .map(tag => tag.string),
                     'param': curr.tags.filter(tag => tag.type === 'param')
-                        .reduce((prev, curr) => {
-
-                            prev.push({
-                                'name': formatStringForParam(curr.name),
-                                'isOptional': curr.optional,
-                                'types': curr.types,
-                                'description': curr.description
-                            });
-
-                            return prev;
-
-                        }, []),
+                        .map(tag => ({
+                            'name': formatStringForParam(tag.name),
+                            'isOptional': tag.optional,
+                            'types': tag.types,
+                            'description': tag.description
+                        })),
                     'property': curr.tags.filter(tag => tag.type === 'property')
-                        .reduce((prev, curr) => {
-
-                            prev.push({
-                                'name': curr.name,
-                                'types': curr.types,
-                                'description': curr.description
-                            });
-
-                            return prev;
-
-                        }, []),
+                        .map(tag => ({
+                            'name': tag.name,
+                            'types': tag.types,
+                            'description': tag.description
+                        })),
                     'return': curr.tags.filter(tag =>
                         tag.type === 'return' || tag.type === 'returns')
-                            .reduce((prev, curr) => {
-
-                                prev.push({
-                                    'types': curr.types,
-                                    'description': curr.description
-                                });
-
-                                return prev;
-
-                            }, [])
+                            .map(tag => ({
+                                'types': tag.types,
+                                'description': tag.description
+                            }))
                 }
             });
 
