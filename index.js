@@ -4,6 +4,10 @@ const formatStringForName = content =>
     content.toString()
         .replace(/\.prototype|\(\)/g, '');
 
+const formatStringForParam = content =>
+    content.toString()
+        .replace(/\[|\]/g, '');
+
 const formatStringForUID = content =>
     content.toString()
         .toLowerCase()
@@ -27,11 +31,11 @@ const parser = (content, filename) =>
 
                             if (prev) {
 
-                                return `${prev}, ${curr.name.replace(/\[|\]/g, '')}`;
+                                return `${prev}, ${formatStringForParam(curr.name)}`;
 
                             }
 
-                            return `${curr.name.replace(/\[|\]/g, '')}`;
+                            return formatStringForParam(curr.name);
 
                         }, ''),
                 'tags': {
@@ -47,7 +51,7 @@ const parser = (content, filename) =>
                         .reduce((prev, curr) => {
 
                             prev.push({
-                                'name': curr.name.replace(/\[|\]/g, ''),
+                                'name': formatStringForParam(curr.name),
                                 'isOptional': curr.optional,
                                 'types': curr.types,
                                 'description': curr.description
