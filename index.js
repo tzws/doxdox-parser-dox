@@ -15,49 +15,40 @@ const formatStringForUID = content =>
         .replace(/^-|-$/g, '');
 
 const parser = (content, filename) =>
-    dox.parseComments(content, {'raw': true}).reduce((prev, curr) => {
-
-        if (!curr.ignore && curr.ctx) {
-
-            prev.push({
-                'uid': formatStringForUID(`${filename}-${curr.ctx.string}`),
-                'isPrivate': curr.isPrivate,
-                'type': curr.ctx.type,
-                'name': formatStringForName(curr.ctx.string),
-                'description': curr.description.full,
-                'params': curr.tags.filter(tag =>
-                    tag.type === 'param' && !tag.name.match(/\./))
-                        .map(tag => formatStringForParam(tag.name))
-                        .join(', '),
-                'tags': {
-                    'example': curr.tags.filter(tag => tag.type === 'example')
-                        .map(tag => tag.string),
-                    'param': curr.tags.filter(tag => tag.type === 'param')
+    dox.parseComments(content, {'raw': true}).filter(method => !method.ignore && method.ctx)
+        .map(method => ({
+            'uid': formatStringForUID(`${filename}-${method.ctx.string}`),
+            'isPrivate': method.isPrivate,
+            'type': method.ctx.type,
+            'name': formatStringForName(method.ctx.string),
+            'description': method.description.full,
+            'params': method.tags.filter(tag =>
+                tag.type === 'param' && !tag.name.match(/\./))
+                    .map(tag => formatStringForParam(tag.name))
+                    .join(', '),
+            'tags': {
+                'example': method.tags.filter(tag => tag.type === 'example')
+                    .map(tag => tag.string),
+                'param': method.tags.filter(tag => tag.type === 'param')
+                    .map(tag => ({
+                        'name': formatStringForParam(tag.name),
+                        'isOptional': tag.optional,
+                        'types': tag.types,
+                        'description': tag.description
+                    })),
+                'property': method.tags.filter(tag => tag.type === 'property')
+                    .map(tag => ({
+                        'name': tag.name,
+                        'types': tag.types,
+                        'description': tag.description
+                    })),
+                'return': method.tags.filter(tag =>
+                    tag.type === 'return' || tag.type === 'returns')
                         .map(tag => ({
-                            'name': formatStringForParam(tag.name),
-                            'isOptional': tag.optional,
                             'types': tag.types,
                             'description': tag.description
-                        })),
-                    'property': curr.tags.filter(tag => tag.type === 'property')
-                        .map(tag => ({
-                            'name': tag.name,
-                            'types': tag.types,
-                            'description': tag.description
-                        })),
-                    'return': curr.tags.filter(tag =>
-                        tag.type === 'return' || tag.type === 'returns')
-                            .map(tag => ({
-                                'types': tag.types,
-                                'description': tag.description
-                            }))
-                }
-            });
-
-        }
-
-        return prev;
-
-    }, []);
+                        }))
+            }
+        }));
 
 module.exports = parser;
