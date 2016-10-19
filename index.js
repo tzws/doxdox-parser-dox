@@ -27,17 +27,8 @@ const parser = (content, filename) =>
                 'description': curr.description.full,
                 'params': curr.tags.filter(tag =>
                     tag.type === 'param' && !tag.name.match(/\./))
-                        .reduce((prev, curr) => {
-
-                            if (prev) {
-
-                                return `${prev}, ${formatStringForParam(curr.name)}`;
-
-                            }
-
-                            return formatStringForParam(curr.name);
-
-                        }, ''),
+                        .map(tag => formatStringForParam(tag.name))
+                        .join(', '),
                 'tags': {
                     'example': curr.tags.filter(tag => tag.type === 'example')
                         .map(tag => tag.string),
