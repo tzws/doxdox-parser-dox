@@ -1,4 +1,134 @@
 /**
+ * Creates a new Facade.js object with either a preexisting canvas tag or a unique name, width, and height.
+ *
+ * @example var stage = new Facade(document.querySelector('canvas'));
+ * @example var stage = new Facade('stage', 500, 300);
+ * @property {Object} canvas Reference to the canvas element.
+ * @property {Object} context Reference to the <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D" target="_blank">CanvasRenderingContext2D</a> object.
+ * @property {Integer} dt Current time in milliseconds since last canvas draw.
+ * @property {Integer} fps Current frames per second.
+ * @property {Integer} ftime Time of last canvas draw.
+ * @param {Object|String} [canvas] Reference to an HTML canvas element or a unique name.
+ * @param {Integer} [width] Width of the canvas.
+ * @param {Integer} [height] Height of the canvas.
+ * @return {Object} New Facade.js object.
+ * @public
+ */
+
+function Facade(canvas, width, height) {
+
+    if (!(this instanceof Facade)) {
+
+        return new Facade(canvas, width, height);
+
+    }
+
+    this.dt = null;
+    this.fps = null;
+    this.ftime = null;
+
+    this._callback = null;
+
+    this._requestAnimation = null;
+
+    this._width = null;
+    this._height = null;
+
+    if (canvas && typeof canvas === 'object' && canvas.nodeType === 1) {
+
+        this.canvas = canvas;
+
+    } else {
+
+        this.canvas = document.createElement('canvas');
+
+        if (typeof canvas === 'string') {
+
+            this.canvas.setAttribute('id', canvas);
+
+        }
+
+    }
+
+    if (width) {
+
+        this.width(width);
+
+    } else if (this.canvas.hasAttribute('width')) {
+
+        this._width = parseInt(this.canvas.getAttribute('width'), 10);
+
+    } else {
+
+        this.width(this.canvas.clientWidth);
+
+    }
+
+    if (height) {
+
+        this.height(height);
+
+    } else if (this.canvas.hasAttribute('height')) {
+
+        this._height = parseInt(this.canvas.getAttribute('height'), 10);
+
+    } else {
+
+        this.height(this.canvas.clientHeight);
+
+    }
+
+    try {
+
+        this.context = this.canvas.getContext('2d');
+
+    } catch (e) {
+
+        console.error('Object passed to Facade.js was not a valid canvas element.');
+
+    }
+
+}
+
+/**
+ * Draws a Facade.js entity (or multiple entities) to the stage.
+ *
+ * @example stage.addToStage(circle);
+ * @example stage.addToStage(circle, { x: 100, y: 100 });
+ * @param {Object|Array} obj Facade.js entity or an array of entities.
+ * @param {Object} [options] Temporary options for rendering a Facade.js entity (or multiple entities).
+ * @return {Object} Facade.js object.
+ * @public
+ */
+
+Facade.prototype.addToStage = function (obj, options) {
+
+    var i,
+        length;
+
+    if (obj instanceof Facade.Entity) {
+
+        obj.draw(this, options);
+
+    } else if (Array.isArray(obj)) {
+
+        for (i = 0, length = obj.length; i < length; i += 1) {
+
+            this.addToStage(obj[i], options);
+
+        }
+
+    } else {
+
+        console.error('Object passed to Facade.addToStage is not a valid Facade.js entity.');
+
+    }
+
+    return this;
+
+};
+
+/**
  * Create a polygon object. Inherits all methods from <b>Facade.Entity</b>.
  *
  * ```

@@ -24,8 +24,19 @@ const parser = (content, filename) =>
             'description': method.description.full,
             'params': method.tags.filter(tag =>
                 tag.type === 'param' && !tag.name.match(/\./))
-                    .map(tag => formatStringForParam(tag.name))
-                    .join(', '),
+                    .map(tag => {
+
+                        if (tag.optional) {
+
+                            return `[${formatStringForParam(tag.name)}]`;
+
+                        }
+
+                        return formatStringForParam(tag.name);
+
+                    })
+                    .join(', ')
+                    .replace(/\], \[/g, ', '),
             'tags': {
                 'example': method.tags.filter(tag => tag.type === 'example')
                     .map(tag => tag.string),

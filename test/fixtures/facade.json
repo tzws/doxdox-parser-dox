@@ -1,11 +1,139 @@
 [
     {
+        "uid": "facade.js-facade",
+        "isPrivate": false,
+        "type": "function",
+        "name": "Facade",
+        "description": "Creates a new Facade.js object with either a preexisting canvas tag or a unique name, width, and height.",
+        "params": "[canvas, width, height]",
+        "tags": {
+            "example": [
+                "var stage = new Facade(document.querySelector('canvas'));",
+                "var stage = new Facade('stage', 500, 300);"
+            ],
+            "param": [
+                {
+                    "name": "canvas",
+                    "isOptional": true,
+                    "types": [
+                        "Object",
+                        "String"
+                    ],
+                    "description": "Reference to an HTML canvas element or a unique name."
+                },
+                {
+                    "name": "width",
+                    "isOptional": true,
+                    "types": [
+                        "Integer"
+                    ],
+                    "description": "Width of the canvas."
+                },
+                {
+                    "name": "height",
+                    "isOptional": true,
+                    "types": [
+                        "Integer"
+                    ],
+                    "description": "Height of the canvas."
+                }
+            ],
+            "property": [
+                {
+                    "name": "canvas",
+                    "types": [
+                        "Object"
+                    ],
+                    "description": "Reference to the canvas element."
+                },
+                {
+                    "name": "context",
+                    "types": [
+                        "Object"
+                    ],
+                    "description": "Reference to the <a href=\"https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D\" target=\"_blank\">CanvasRenderingContext2D</a> object."
+                },
+                {
+                    "name": "dt",
+                    "types": [
+                        "Integer"
+                    ],
+                    "description": "Current time in milliseconds since last canvas draw."
+                },
+                {
+                    "name": "fps",
+                    "types": [
+                        "Integer"
+                    ],
+                    "description": "Current frames per second."
+                },
+                {
+                    "name": "ftime",
+                    "types": [
+                        "Integer"
+                    ],
+                    "description": "Time of last canvas draw."
+                }
+            ],
+            "return": [
+                {
+                    "types": [
+                        "Object"
+                    ],
+                    "description": "New Facade.js object."
+                }
+            ]
+        }
+    },
+    {
+        "uid": "facade.js-facade.prototype.addtostage",
+        "isPrivate": false,
+        "type": "method",
+        "name": "Facade.addToStage",
+        "description": "Draws a Facade.js entity (or multiple entities) to the stage.",
+        "params": "obj, [options]",
+        "tags": {
+            "example": [
+                "stage.addToStage(circle);",
+                "stage.addToStage(circle, { x: 100, y: 100 });"
+            ],
+            "param": [
+                {
+                    "name": "obj",
+                    "isOptional": false,
+                    "types": [
+                        "Object",
+                        "Array"
+                    ],
+                    "description": "Facade.js entity or an array of entities."
+                },
+                {
+                    "name": "options",
+                    "isOptional": true,
+                    "types": [
+                        "Object"
+                    ],
+                    "description": "Temporary options for rendering a Facade.js entity (or multiple entities)."
+                }
+            ],
+            "property": [],
+            "return": [
+                {
+                    "types": [
+                        "Object"
+                    ],
+                    "description": "Facade.js object."
+                }
+            ]
+        }
+    },
+    {
         "uid": "facade.js-facade.polygon",
         "isPrivate": false,
         "type": "method",
         "name": "Facade.Polygon",
         "description": "Create a polygon object. Inherits all methods from <b>Facade.Entity</b>.\n\n```\nvar polygon = new Facade.Polygon({\n    x: 0,\n    y: 0,\n    points: [ [100, 0], [200, 100], [100, 200], [0, 100] ],\n    lineWidth: 10,\n    strokeStyle: '#333E4B',\n    fillStyle: '#1C73A8',\n    anchor: 'top/left'\n});\n```",
-        "params": "options",
+        "params": "[options]",
         "tags": {
             "example": [],
             "param": [
