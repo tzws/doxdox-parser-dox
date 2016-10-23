@@ -2,7 +2,7 @@ const dox = require('dox');
 
 const formatStringForName = content =>
     content.toString()
-        .replace(/\.prototype|\(\)/g, '');
+        .replace(/module\.exports\.|\.prototype|\(\)/g, '');
 
 const formatStringForParam = content =>
     content.toString()
