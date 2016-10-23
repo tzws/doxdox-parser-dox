@@ -12,6 +12,9 @@
     "eslint": "3.8.1",
     "mocha": "3.1.2"
   },
+  "peerDependencies": {
+    "doxdox": "^1.0.x"
+  },
   "scripts": {
     "test": "make test"
   },
