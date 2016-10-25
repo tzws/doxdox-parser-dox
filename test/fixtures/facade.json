@@ -91,7 +91,7 @@
         "type": "method",
         "name": "Facade.addToStage",
         "description": "Draws a Facade.js entity (or multiple entities) to the stage.",
-        "params": "obj, [options]",
+        "params": "obj[, options]",
         "tags": {
             "example": [
                 "stage.addToStage(circle);",
