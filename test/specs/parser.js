@@ -1,6 +1,5 @@
 const assert = require('assert');
 const fs = require('fs');
-const path = require('path');
 
 const parser = require('../../index');
 
@@ -8,35 +7,17 @@ describe('doxdox parser', () => {
 
     ['dox', 'facade'].forEach(file => {
 
-        it(`parser on ${file}.js`, done => {
+        it(`run dox parser on ${file}.js`, () => {
 
-            fs.readFile(path.join(__dirname, `../fixtures/${file}.js`), 'utf8', (err, contents) => {
+            const contents = fs.readFileSync(`./test/fixtures/${file}.js`, 'utf8');
 
-                if (err) {
+            const methods = parser(contents, `${file}.js`);
 
-                    throw new Error(err);
+            // fs.writeFileSync(path.join(__dirname, `../fixtures/${file}.json`), JSON.stringify(methods, true, 4));
 
-                }
+            const data = fs.readFileSync(`./test/fixtures/${file}.json`, 'utf8');
 
-                const methods = parser(contents, `${file}.js`);
-
-                // fs.writeFileSync(path.join(__dirname, `../fixtures/${file}.json`), JSON.stringify(methods, true, 4));
-
-                fs.readFile(path.join(__dirname, `../fixtures/${file}.json`), 'utf8', (err, data) => {
-
-                    if (err) {
-
-                        throw new Error(err);
-
-                    }
-
-                    assert.deepEqual(methods, JSON.parse(data));
-
-                    done();
-
-                });
-
-            });
+            assert.deepEqual(methods, JSON.parse(data));
 
         });
 
