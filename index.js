@@ -36,7 +36,8 @@ const parser = (content, filename) =>
 
                     })
                     .join(', ')
-                    .replace(/\], \[/g, ', '),
+                    .replace(/\], \[/g, ', ')
+                    .replace(', [', '[, '),
             'tags': {
                 'example': method.tags.filter(tag => tag.type === 'example')
                     .map(tag => tag.string),
