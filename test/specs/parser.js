@@ -13,7 +13,7 @@ describe('doxdox parser', () => {
 
             const methods = parser(contents, `${file}.js`);
 
-            // fs.writeFileSync(path.join(__dirname, `../fixtures/${file}.json`), JSON.stringify(methods, true, 4));
+            // fs.writeFileSync(`./test/fixtures/${file}.json`, JSON.stringify(methods, true, 4));
 
             const data = fs.readFileSync(`./test/fixtures/${file}.json`, 'utf8');
 
