@@ -5,6 +5,7 @@
         "type": "function",
         "name": "Facade",
         "description": "Creates a new Facade.js object with either a preexisting canvas tag or a unique name, width, and height.",
+        "empty": false,
         "params": "[canvas, width, height]",
         "tags": {
             "example": [
@@ -91,6 +92,7 @@
         "type": "method",
         "name": "Facade.addToStage",
         "description": "Draws a Facade.js entity (or multiple entities) to the stage.",
+        "empty": false,
         "params": "obj[, options]",
         "tags": {
             "example": [
@@ -133,6 +135,7 @@
         "type": "method",
         "name": "Facade.Polygon",
         "description": "Create a polygon object. Inherits all methods from <b>Facade.Entity</b>.\n\n```\nvar polygon = new Facade.Polygon({\n    x: 0,\n    y: 0,\n    points: [ [100, 0], [200, 100], [100, 200], [0, 100] ],\n    lineWidth: 10,\n    strokeStyle: '#333E4B',\n    fillStyle: '#1C73A8',\n    anchor: 'top/left'\n});\n```",
+        "empty": false,
         "params": "[options]",
         "tags": {
             "example": [],
@@ -267,6 +270,7 @@
         "type": "method",
         "name": "Facade.Polygon._defaultOptions",
         "description": "Returns a default set of options common to all Facade.js polygon entities.",
+        "empty": false,
         "params": "updated",
         "tags": {
             "example": [
@@ -299,6 +303,7 @@
         "type": "method",
         "name": "Facade.Polygon._draw",
         "description": "Renders a polygon entity to a canvas.",
+        "empty": false,
         "params": "facade, options, metrics",
         "tags": {
             "example": [

@@ -5,6 +5,7 @@
         "type": "method",
         "name": "exports.escape",
         "description": "Escape the given `html`.",
+        "empty": false,
         "params": "html",
         "tags": {
             "example": [
