@@ -22,6 +22,7 @@ const parser = (content, filename) =>
             'type': method.ctx.type,
             'name': formatStringForName(method.ctx.string),
             'description': method.description.full,
+            'empty': !method.description.full && !method.tags.length,
             'params': method.tags.filter(tag =>
                 tag.type === 'param' && !tag.name.match(/\./))
                     .map(tag => {
@@ -61,6 +62,7 @@ const parser = (content, filename) =>
                             'description': tag.description
                         }))
             }
-        }));
+        }))
+        .filter(method => !method.empty);
 
 module.exports = parser;
