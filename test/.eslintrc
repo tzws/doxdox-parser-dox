@@ -3,6 +3,7 @@
     "@neogeek/eslint-config-standards/.eslintrc-tests"
   ],
   "rules": {
+    "capitalized-comments": 0,
     "no-sync": 0
   }
 }
