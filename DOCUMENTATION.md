@@ -92,7 +92,7 @@ formatStringForUID('example string');
 
 #### parser(content, filename) 
 
-dox parser for doxdox.
+Dox parser for doxdox.
 
 
 

@@ -42,7 +42,7 @@ const formatStringForUID = content =>
         .replace(/^-|-$/g, '');
 
 /**
- * dox parser for doxdox.
+ * Dox parser for doxdox.
  *
  * @example parser(content, 'index.js').then(methods => console.log(methods));
  * @param {String} content Contents of file.
