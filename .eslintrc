@@ -3,6 +3,7 @@
     "@neogeek/eslint-config-standards"
   ],
   "rules": {
+    "capitalized-comments": 0,
     "no-shadow": 0,
     "no-useless-escape": 0,
     "sort-keys": 0

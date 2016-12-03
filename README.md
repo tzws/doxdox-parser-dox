@@ -4,6 +4,7 @@
 
 [![Build Status](https://travis-ci.org/neogeek/doxdox-parser-dox.svg?branch=master)](https://travis-ci.org/neogeek/doxdox-parser-dox)
 [![NPM Version](http://img.shields.io/npm/v/doxdox-parser-dox.svg?style=flat)](https://www.npmjs.org/package/doxdox-parser-dox)
+[![Latest Documentation](https://doxdox.org/images/badge-flat.svg)](https://doxdox.org/)
 
 ## Install
 

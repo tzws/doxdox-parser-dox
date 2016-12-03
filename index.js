@@ -1,18 +1,55 @@
 const dox = require('dox');
 
+/**
+ * Format string as name.
+ *
+ * @example formatStringForName('module.exports.parser');
+ * @param {String} contents String to format.
+ * @return {String} Formatted string.
+ * @private
+ */
+
 const formatStringForName = content =>
     content.toString()
         .replace(/module\.exports\.|\.prototype|\(\)/g, '');
 
+/**
+ * Format string as param.
+ *
+ * @example formatStringForParam('[optional param]');
+ * @param {String} contents String to format.
+ * @return {String} Formatted string.
+ * @private
+ */
+
 const formatStringForParam = content =>
     content.toString()
         .replace(/\[|\]/g, '');
+
+/**
+ * Format string as UID.
+ *
+ * @example formatStringForUID('example string');
+ * @param {String} contents String to format.
+ * @return {String} Formatted string.
+ * @private
+ */
 
 const formatStringForUID = content =>
     content.toString()
         .toLowerCase()
         .replace(/[^\w\.]+/g, '-')
         .replace(/^-|-$/g, '');
+
+/**
+ * dox parser for doxdox.
+ *
+ * @example parser(content, 'index.js').then(methods => console.log(methods));
+ * @param {String} content Contents of file.
+ * @param {String} filename Name of file. Used to generate UIDs.
+ * @return {Promise} Promise with methods parsed from contents.
+ * @public
+ */
 
 const parser = (content, filename) =>
     dox.parseComments(content, {'raw': true}).filter(method => !method.ignore && method.ctx)
