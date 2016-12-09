@@ -15,7 +15,9 @@ Format string as name.
 
 ##### Parameters
 
-- **contents** `String`   String to format.
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| contents | `String`  | String to format. | &nbsp; |
 
 
 
@@ -30,7 +32,7 @@ formatStringForName('module.exports.parser');
 ##### Returns
 
 
-- `String`   Formatted string.
+- `String`  Formatted string.
 
 
 
@@ -43,7 +45,9 @@ Format string as param.
 
 ##### Parameters
 
-- **contents** `String`   String to format.
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| contents | `String`  | String to format. | &nbsp; |
 
 
 
@@ -58,7 +62,7 @@ formatStringForParam('[optional param]');
 ##### Returns
 
 
-- `String`   Formatted string.
+- `String`  Formatted string.
 
 
 
@@ -71,7 +75,9 @@ Format string as UID.
 
 ##### Parameters
 
-- **contents** `String`   String to format.
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| contents | `String`  | String to format. | &nbsp; |
 
 
 
@@ -86,7 +92,7 @@ formatStringForUID('example string');
 ##### Returns
 
 
-- `String`   Formatted string.
+- `String`  Formatted string.
 
 
 
@@ -99,8 +105,10 @@ Dox parser for doxdox.
 
 ##### Parameters
 
-- **content** `String`   Contents of file.
-- **filename** `String`   Name of file. Used to generate UIDs.
+| Name | Type | Description |  |
+| ---- | ---- | ----------- | -------- |
+| content | `String`  | Contents of file. | &nbsp; |
+| filename | `String`  | Name of file. Used to generate UIDs. | &nbsp; |
 
 
 
@@ -115,7 +123,7 @@ parser(content, 'index.js').then(methods => console.log(methods));
 ##### Returns
 
 
-- `Promise`   Promise with methods parsed from contents.
+- `Promise`  Promise with methods parsed from contents.
 
 
 
