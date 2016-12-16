@@ -11,8 +11,8 @@
     "dox": "0.9.0"
   },
   "devDependencies": {
-    "@neogeek/eslint-config-standards": "1.9.0",
-    "eslint": "3.11.1",
+    "@neogeek/eslint-config-standards": "1.10.0",
+    "eslint": "3.12.2",
     "mocha": "3.2.0"
   },
   "peerDependencies": {
