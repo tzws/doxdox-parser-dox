@@ -5,7 +5,10 @@ const parser = require('../../index');
 
 describe('doxdox parser', () => {
 
-    ['dox', 'facade'].forEach(file => {
+    [
+        'dox',
+        'facade'
+    ].forEach(file => {
 
         it(`run dox parser on ${file}.js`, () => {
 
