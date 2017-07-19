@@ -62,20 +62,20 @@ const parser = (content, filename) =>
             'empty': !method.description.full && !method.tags.length,
             'params': method.tags.filter(tag =>
                 tag.type === 'param' && !tag.name.match(/\./))
-                    .map(tag => {
+                .map(tag => {
 
-                        if (tag.optional) {
+                    if (tag.optional) {
 
-                            return `[${formatStringForParam(tag.name)}]`;
+                        return `[${formatStringForParam(tag.name)}]`;
 
-                        }
+                    }
 
-                        return formatStringForParam(tag.name);
+                    return formatStringForParam(tag.name);
 
-                    })
-                    .join(', ')
-                    .replace(/\], \[/g, ', ')
-                    .replace(', [', '[, '),
+                })
+                .join(', ')
+                .replace(/\], \[/g, ', ')
+                .replace(', [', '[, '),
             'tags': {
                 'example': method.tags.filter(tag => tag.type === 'example')
                     .map(tag => tag.string),
@@ -94,10 +94,10 @@ const parser = (content, filename) =>
                     })),
                 'return': method.tags.filter(tag =>
                     tag.type === 'return' || tag.type === 'returns')
-                        .map(tag => ({
-                            'types': tag.types,
-                            'description': tag.description
-                        }))
+                    .map(tag => ({
+                        'types': tag.types,
+                        'description': tag.description
+                    }))
             }
         }))
         .filter(method => !method.empty);
