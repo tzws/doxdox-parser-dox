@@ -52,7 +52,10 @@ const formatStringForUID = content =>
  */
 
 const parser = (content, filename) =>
-    dox.parseComments(content, {'raw': true}).filter(method => !method.ignore && method.ctx)
+    dox.parseComments(content, {
+        'raw': true,
+        'skipSingleStar': true
+    }).filter(method => !method.ignore && method.ctx)
         .map(method => ({
             'uid': formatStringForUID(`${filename}-${method.ctx.string}`),
             'isPrivate': method.isPrivate,

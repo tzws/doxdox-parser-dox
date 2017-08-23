@@ -34,6 +34,8 @@ function Facade(canvas, width, height) {
     this._width = null;
     this._height = null;
 
+    /* prettier ignore */
+
     if (canvas && typeof canvas === 'object' && canvas.nodeType === 1) {
 
         this.canvas = canvas;
