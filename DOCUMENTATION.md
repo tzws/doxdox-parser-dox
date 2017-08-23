@@ -1,4 +1,4 @@
-# [doxdox-parser-dox](https://github.com/neogeek/doxdox-parser-dox) *1.1.2*
+# [doxdox-parser-dox](https://github.com/neogeek/doxdox-parser-dox) *1.1.3*
 
 > Dox parser plugin for doxdox.
 
