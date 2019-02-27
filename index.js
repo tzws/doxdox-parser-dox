@@ -10,8 +10,7 @@ const dox = require('dox');
  */
 
 const formatStringForName = content =>
-    content.toString()
-        .replace(/module\.exports\.|\.prototype|\(\)/g, '');
+    content.toString().replace(/module\.exports\.|\.prototype|\(\)/gu, '');
 
 /**
  * Format string as param.
@@ -23,8 +22,7 @@ const formatStringForName = content =>
  */
 
 const formatStringForParam = content =>
-    content.toString()
-        .replace(/\[|\]/g, '');
+    content.toString().replace(/\[|\]/gu, '');
 
 /**
  * Format string as UID.
@@ -36,10 +34,11 @@ const formatStringForParam = content =>
  */
 
 const formatStringForUID = content =>
-    content.toString()
+    content
+        .toString()
         .toLowerCase()
-        .replace(/[^\w\.]+/g, '-')
-        .replace(/^-|-$/g, '');
+        .replace(/[^\w\.]+/gu, '-')
+        .replace(/^-|-$/gu, '');
 
 /**
  * Dox parser for doxdox.
@@ -52,10 +51,12 @@ const formatStringForUID = content =>
  */
 
 const parser = (content, filename) =>
-    dox.parseComments(content, {
-        'raw': true,
-        'skipSingleStar': true
-    }).filter(method => !method.ignore && method.ctx)
+    dox
+        .parseComments(content, {
+            'raw': true,
+            'skipSingleStar': true
+        })
+        .filter(method => !method.ignore && method.ctx)
         .map(method => ({
             'uid': formatStringForUID(`${filename}-${method.ctx.string}`),
             'isPrivate': method.isPrivate,
@@ -63,8 +64,8 @@ const parser = (content, filename) =>
             'name': formatStringForName(method.ctx.string),
             'description': method.description.full,
             'empty': !method.description.full && !method.tags.length,
-            'params': method.tags.filter(tag =>
-                tag.type === 'param' && !tag.name.match(/\./))
+            'params': method.tags
+                .filter(tag => tag.type === 'param' && !tag.name.match(/\./u))
                 .map(tag => {
 
                     if (tag.optional) {
@@ -77,26 +78,29 @@ const parser = (content, filename) =>
 
                 })
                 .join(', ')
-                .replace(/\], \[/g, ', ')
+                .replace(/\], \[/gu, ', ')
                 .replace(', [', '[, '),
             'tags': {
-                'example': method.tags.filter(tag => tag.type === 'example')
+                'example': method.tags
+                    .filter(tag => tag.type === 'example')
                     .map(tag => tag.string),
-                'param': method.tags.filter(tag => tag.type === 'param')
+                'param': method.tags
+                    .filter(tag => tag.type === 'param')
                     .map(tag => ({
                         'name': formatStringForParam(tag.name),
                         'isOptional': tag.optional,
                         'types': tag.types,
                         'description': tag.description
                     })),
-                'property': method.tags.filter(tag => tag.type === 'property')
+                'property': method.tags
+                    .filter(tag => tag.type === 'property')
                     .map(tag => ({
                         'name': tag.name,
                         'types': tag.types,
                         'description': tag.description
                     })),
-                'return': method.tags.filter(tag =>
-                    tag.type === 'return' || tag.type === 'returns')
+                'return': method.tags
+                    .filter(tag => tag.type === 'return' || tag.type === 'returns')
                     .map(tag => ({
                         'types': tag.types,
                         'description': tag.description
