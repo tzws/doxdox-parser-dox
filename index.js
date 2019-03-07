@@ -106,7 +106,10 @@ const parser = (content, filename) =>
                         'description': tag.description
                     })),
                 'access': method.tags.filter(tag => tag.type === 'access')
-                .map(tag => tag.string),
+                .map(tag => ({
+                    'name': tag.string,
+                    'types': tag.types
+                })),
             }
         }))
         .filter(method => !method.empty);
